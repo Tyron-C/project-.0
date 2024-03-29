@@ -10,6 +10,7 @@ const App = () => {
   // 'file' set to (null)
   const [file, setFile] = useState(null);
   const [url, setUrl] = useState(null);
+  const [searchResults, setSearchResults] = useState([]);
 
   // Event Handler:
   // triggered when user selects a file on input element
@@ -44,7 +45,7 @@ const App = () => {
         }
       });
 
-      console.log(response.data);
+      setSearchResults(response.data.result);
     } catch (e) {
       console.error('Error: ', e);
     }
@@ -53,7 +54,7 @@ const App = () => {
   const searchByUrl = async () => {
     try {
       const response = await axios.get(`https://api.trace.moe/search?url=${encodeURIComponent(url)}`);
-      console.log(response.data);
+      setSearchResults(response.data.result);
     } catch (e) {
       console.error('Error: ', e);
     }
@@ -63,11 +64,42 @@ const App = () => {
   return (
     <>
       <div>
-        <input type="file" onChange={handleFileSelect} value={file || ''}/>
-        <button onClick={handleSubmit}>Submit</button>
-        <input type="text" placeholder="Enter image URL" value={url || ''} onChange={handleUrlSearch} />
-        <button onClick={searchByUrl}>search by URL</button>
+        <input 
+          type="file" 
+          onChange={handleFileSelect} 
+          value={file || ''}
+        />
+
+        <button 
+          onClick={handleSubmit}
+          >Submit
+        </button>
+
+        <input 
+          type="text" 
+          placeholder="Enter image URL" 
+          value={url || ''} 
+          onChange={handleUrlSearch} 
+        />
+
+        <button 
+          onClick={searchByUrl}
+          >search by URL
+        </button>
+      
+        {searchResults.map(result => (
+          <div key={result.anilist}>
+            <h2>{result.filename}</h2>
+            <p>Similarity: {result.similarity}</p>
+
+            <video controls>
+              <source src={result.video} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        ))}
       </div>
+      
     </>
   )
 }
