@@ -20,15 +20,22 @@ const App = () => {
 
   // Form Submission:
   // called on submit button
-  // 
   const handleSubmit = async () => {
     try {
+      // create a new 'FormData' object
       const formData = new FormData();
+      // append selected file to object
+      // assign key-name 'file' 
+      // value is the file stored in the state variable obtained from the input element
       formData.append('file', file);
 
+      // Post request:
+      // await executing until response has been received from request
+      // post data from 'formData' object
       const response = await axios.post('https://api.trace.moe/search', formData, {
         headers: {
-          'Content-Type': 'multipart/form-data'
+          // specify content type of data sent to be an image with any subtype (JPEG, PNG, GIF...)
+          'Content-Type': 'image/*'
         }
       });
 
