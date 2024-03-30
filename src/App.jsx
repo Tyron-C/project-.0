@@ -59,6 +59,8 @@ const App = () => {
       console.error('Error: ', e);
     }
   }
+  
+  const uniqueAnilistIds = [...new Set(searchResults.map(result => result.anilist.id))];
 
 
   return (
@@ -107,18 +109,26 @@ const App = () => {
         </div>
         
       
-        {searchResults.filter(result => result.similarity >= 0.9).map(result => (
-          <div 
-            key={result.anilist}
-            className='flex flex-col items center justify-center'>
-            <p className=''>Similarity: {Math.round(result.similarity * 100)}%</p>
-
-            <video className='' controls>
-              <source src={result.video} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          </div>
-        ))}
+        {uniqueAnilistIds.map(anilistId => {
+          // Find the first result with the current anilistId
+          const result = searchResults.find(result => result.anilist.id === anilistId);
+          if (result && result.similarity >= 0.9) {
+            return (
+              <div 
+                key={result.anilist.id}
+                className='flex flex-col items-center justify-center'
+              >
+                <p className=''>Similarity: {Math.round(result.similarity * 100)}%</p>
+                <video className='' controls>
+                  <source src={result.video} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            );
+          } else {
+            return null; // Skip rendering if similarity is below 0.9 or result is undefined
+          }
+        })}
         </div>
       </div>
       
