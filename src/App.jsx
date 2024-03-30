@@ -63,41 +63,63 @@ const App = () => {
 
   return (
     <>
-      <div>
+    <h1 className='text-center my-10 text-2xl font-semibold'>Anime Scene Search</h1>
+      <div className='w-full flex items-center justify-center text-center'>
+        <div className=''>
+        <div className=''>
         <input 
           type="file" 
           onChange={handleFileSelect} 
-          value={file || ''}
+          className='w-1/2 text-sm text-gray-500
+                     file:me-4 file:py-2.5 file:px-4
+                     file:rounded-lg file:border-0
+                     file:text-sm file:font-semibold
+                     file:bg-blue-600 file:text-white
+                     hover:file:bg-blue-400'
         />
+
+
+        
+
 
         <button 
           onClick={handleSubmit}
-          >Submit
+          className='py-2 px-4 ml-10 rounded-lg border-0 font-semibold
+                     bg-blue-500 text-white hover:bg-blue-400'
+          >Search by file
         </button>
-
+        </div>
+        <div className='mb-8'>
         <input 
           type="text" 
           placeholder="Enter image URL" 
           value={url || ''} 
           onChange={handleUrlSearch} 
+          className='py-2 px-4 w-1/2 border-blue-500 rounded-lg text-sm'
         />
 
         <button 
           onClick={searchByUrl}
-          >search by URL
+          className='py-2 px-4 ml-10 rounded-lg border-0 font-semibold
+                     bg-blue-500 text-white hover:bg-blue-400'
+          >Search by URL
         </button>
+        </div>
+        
       
-        {searchResults.map(result => (
-          <div key={result.anilist}>
-            <h2>{result.filename}</h2>
-            <p>Similarity: {result.similarity}</p>
+        {searchResults.filter(result => result.similarity >= 0.9).map(result => (
+          <div 
+            key={result.anilist}
+            className='flex flex-col items center justify-center'>
+            <p className=''>Similarity: {Math.round(result.similarity * 100)}%</p>
 
-            <video controls>
+            <video className='' controls>
               <source src={result.video} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
           </div>
         ))}
+        </div>
       </div>
       
     </>
