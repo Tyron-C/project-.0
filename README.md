@@ -1,8 +1,16 @@
-# React + Vite
+# Anime Scene Search
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Application used to find the scene from an anime show that corresponds with the image you upload
 
-Currently, two official plugins are available:
+## Installation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Use the package manager [npm](https://www.npmjs.com/) to install the nessesary packages.
+
+```bash
+npm install 
+```
+Then to run the application on local host...
+
+```bash
+npm run dev
+```
