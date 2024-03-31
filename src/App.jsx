@@ -68,6 +68,11 @@ const App = () => {
   return (
     <>
       <h1 className='text-center my-10 text-2xl font-semibold'>Anime Scene Search</h1>
+        <p className='text-center mb-7'
+          >Upload a file of an image or a URL of an image hosted somewhere else <br/>
+           The search will try to find the scene from the image you uploaded <br/>
+           Higher than a 50% similarity.
+        </p>
         <div className='w-full flex items-center justify-center text-center'>
           <div className=''>
             <div className=''>
@@ -133,10 +138,6 @@ const App = () => {
                       className='flex flex-col items-center justify-center'
                     >
 
-                      <p className=''
-                        >Similarity: {Math.round(result.similarity * 100)}%
-                      </p>
-
                       <video 
                         controls 
                         className=''
@@ -144,8 +145,12 @@ const App = () => {
                         <source 
                           src={result.video} 
                           type="video/mp4" 
-                          />Your browser does not support the video tag.
+                          />Your browser d1oes not support the video tag.
                       </video>
+
+                      <p className=''
+                        >Similarity: {Math.round(result.similarity * 100)}%
+                      </p>
                     </div>
                   );
                 } else {
