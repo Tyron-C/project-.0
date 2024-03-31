@@ -70,7 +70,7 @@ const App = () => {
       <h1 className='text-center my-10 text-2xl font-semibold'>Anime Scene Search</h1>
         <p className='text-center mb-7'
           >Upload a file of an image or a URL of an image hosted somewhere else <br/>
-           The search will try to find the scene from the image you uploaded <br/>
+           The search will try to find the scene that matches the image you uploaded <br/>
            Higher than a 50% similarity.
         </p>
         <div className='w-full flex items-center justify-center text-center'>
